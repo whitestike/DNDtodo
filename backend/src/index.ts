@@ -22,7 +22,40 @@ app.get("/users", async (req, res) => {
     const users = await prisma.user.findMany();
     res.json(users);
 });
+
+// Get login a user with email and password
+app.post("/login", async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email
+    },
+  });
+
+  if(user != null && user.password == password){
+    res.send(user);
+  }
+
+  res.status(401).end();
+});
   
+// Post create a user
+app.post("/user", async (req, res) => {
+  const user = req.body.user;
+
+  const users = await prisma.user.create({
+    data: {
+      email: user.email,
+      name: user.name,
+      password: user.password,
+    },
+  });
+
+  res.status(201).end();
+});
+
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
