@@ -14,6 +14,9 @@ import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { authFeatureKey, authReducer } from './reducers';
+import { AuthGuard } from './auth.guard';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth.effects';
 
 
 @NgModule({
@@ -34,6 +37,7 @@ import { authFeatureKey, authReducer } from './reducers';
     BrowserAnimationsModule,
     MatSnackBarModule,
     RouterModule.forChild([{path: 'login', component: LoginComponent}]),
+    EffectsModule.forFeature([AuthEffects]),
     StoreModule.forFeature(
       authFeatureKey,
       authReducer
@@ -48,7 +52,8 @@ export class AuthModule {
     return{
         ngModule: AuthModule,
         providers: [
-            AuthService
+            AuthService,
+            AuthGuard
         ]
     }
   }

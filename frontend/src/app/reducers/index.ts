@@ -1,6 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-export const authFeatureKey = 'auth';
+export const authFeatureKey = 'app';
 
 export interface AppState {
 
