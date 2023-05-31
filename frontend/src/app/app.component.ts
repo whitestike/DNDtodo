@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../types/users';
-
+import { Store } from '@ngrx/store';
+import { AppState } from './reducers';
+import { AuthActions } from './auth/action-types';
  
 @Component({
   selector: 'app-root',
@@ -9,11 +9,12 @@ import { User } from '../types/users';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  users: User[] | undefined;
+  constructor(
+    private store: Store<AppState>
+  ){}
 
-  constructor(private http: HttpClient){}
-
-  ngOnInit(){
-
+  logout(){
+    this.store.dispatch(AuthActions.logout());
+    console.log("login out");
   }
 }
