@@ -56,6 +56,11 @@ app.post("/user", async (req, res) => {
   res.status(201).end();
 });
 
+app.get("/todos", async (req, res) => {
+  const todos = await prisma.todo.findMany();
+  res.json(todos);
+})
+
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
