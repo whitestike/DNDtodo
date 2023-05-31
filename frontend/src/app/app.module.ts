@@ -18,6 +18,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { EffectsModule } from '@ngrx/effects';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatCheckboxModule,
+    MatTableModule,
     AuthModule.forRoot(),
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),

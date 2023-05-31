@@ -20,6 +20,6 @@ model User {
 
 model Todo {
   id Int @id @default(autoincrement())
-  descritpion String
+  description String
   done Boolean
 }
