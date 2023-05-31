@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TodoService } from './todo.service';
 import { Todo } from 'src/types/todos';
-import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +10,41 @@ import { Observable, tap } from 'rxjs';
 export class HomeComponent {
 
   todos: Todo[] = [];
-  displayedColumns: string[] = ['id', 'description', 'done'];
+  displayTodos: Todo[] = [];
+  showDone: boolean = false;
+
+  displayedColumns = ['id', 'description', 'done'];
 
   constructor(
     private todoService: TodoService
   ){}
 
   ngOnInit(){
-    this.todoService.GetAllTodos().subscribe(todos => {
-      this.todos = todos;
+    const todoObservable = this.todoService.GetAllTodos();
+
+    todoObservable.subscribe(todos => {
+      this.filterTodos(todos);
     });
+
+    
   }
 
+  filterTodos(todos: Todo[]){
+    this.todos = todos;
+    if(this.showDone){
+      this.displayTodos = todos.filter(todo => !todo.done);
+    }else{
+      this.displayTodos = todos;
+    }
+  }
+
+  updateAllComplete(){
+    this.filterTodos(this.todos);
+  }
+
+  updateSelected(id: number){
+    this.todos[id - 1].done = !this.todos[id - 1].done
+
+    this.filterTodos(this.todos);
+  }
 }
