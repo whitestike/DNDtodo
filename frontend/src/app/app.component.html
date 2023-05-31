@@ -1,1 +1,6 @@
-<h1 *ngFor="let user of users">{{user.email}}</h1>
+<mat-toolbar color="primary">
+    <h1 style="margin: 0 10px 0 0;">DNDTodo</h1>
+    <button mat-button routerLink="home">home</button>
+    <button mat-button routerLink="login">login</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
