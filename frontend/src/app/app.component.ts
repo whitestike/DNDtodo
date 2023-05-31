@@ -4,7 +4,6 @@ import { AppState } from './reducers';
 import { AuthActions } from './auth/action-types';
 import { Observable } from 'rxjs';
 import { isLoggedIn, isLoggedOut } from './auth/auth.selectors';
-import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-root',
@@ -18,10 +17,16 @@ export class AppComponent implements OnInit{
 
   constructor(
     private store: Store<AppState>,
-    private router: Router
   ){}
 
   ngOnInit(){
+
+    const userProfile = localStorage.getItem("user");
+
+    if(userProfile){
+      this.store.dispatch(AuthActions.login({user: JSON.parse(userProfile)}));
+    }
+
     this.isLoggedIn$ = this.store.pipe(
       select(isLoggedIn)
     )
@@ -32,7 +37,6 @@ export class AppComponent implements OnInit{
   }
 
   logout(){
-    this.router.navigateByUrl("/login");
     this.store.dispatch(AuthActions.logout());
   }
 }
