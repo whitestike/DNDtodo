@@ -26,4 +26,16 @@ export class AuthService{
             })
         );
     }
+
+    Register(email: string, password: string, name: string): Observable<User>{
+        return this.http.post<User>('http://localhost:8000/user', {"user": {"email": email, "name": name, "password": password}}).pipe(
+            catchError(error => {
+                if (!!error.status) {
+                    this.snackBar.open("something whent wrong", "try again");
+                    return NEVER;
+                }
+                return throwError(error);
+            })
+        )
+    }
 }

@@ -45,7 +45,7 @@ app.post("/login", async (req, res) => {
 app.post("/user", async (req, res) => {
   const user = req.body.user;
 
-  const users = await prisma.user.create({
+  const createdUser = await prisma.user.create({
     data: {
       email: user.email,
       name: user.name,
@@ -53,14 +53,20 @@ app.post("/user", async (req, res) => {
     },
   });
 
-  res.status(201).end();
+  if(createdUser != null){
+    res.send(user);
+  }
+
+  res.status(401).end();
 });
 
+// Get all todos
 app.get("/todos", async (req, res) => {
   const todos = await prisma.todo.findMany();
   res.json(todos);
 })
 
+// Update a todo
 app.put("/todo", async (req, res) => {
   const todo = req.body.todo;
   const updatedTodo = await prisma.todo.update({
