@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AppState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '../action-types';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -22,15 +23,17 @@ export class LoginComponent {
   ) {}
 
   loginForm = this.formBuilder.group({
-    email: ['rickert.goyvaerts@gmail.com', [Validators.required]],
-    password: ['password', [Validators.required]]
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]]
   });
 
   onSubmit(): void {
     const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
+    let password = this.loginForm.value.password;
+    
     if(password != null && password != undefined && email != null && email != undefined){
-      this.authService.Login(password, email)
+      let encryptedPassword = CryptoJS.SHA256(password).toString();
+      this.authService.Login(encryptedPassword, email)
       .pipe(
         tap(user => {
           this.store.dispatch(AuthActions.login({user}));

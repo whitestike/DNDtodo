@@ -20,6 +20,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
+import { TodoEffects } from './home/todo/todo.effects';
+import { TodoReducer } from './home/todo/reducers/todo.reducers';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {MatTableModule} from '@angular/material/table';
     MatTableModule,
     AuthModule.forRoot(),
     StoreModule.forRoot({}, {}),
+    StoreModule.forFeature("todos", TodoReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([])
   ],

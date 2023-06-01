@@ -3,7 +3,7 @@
     <div class="container--table">
         <div class="container--title">
             <h1>Your todo list</h1>
-            <mat-checkbox [(ngModel)]="showDone" (ngModelChange)="updateAllComplete()" class="example-margin" color="primary">show done todo's</mat-checkbox>
+            <mat-checkbox [(ngModel)]="showDone" (ngModelChange)="updateAllComplete()" class="example-margin" color="primary">Hide done todo's</mat-checkbox>
         </div>
         <table mat-table [dataSource]="displayTodos" class="table--todos mat-elevation-z8">
 
@@ -20,12 +20,13 @@
             <ng-container matColumnDef="done">    
                 <th mat-header-cell *matHeaderCellDef>done</th>
                 <td mat-cell *matCellDef="let todo">
-                    <mat-checkbox (ngModelChange)="updateSelected(todo.id)" class="example-margin" color="primary" [(ngModel)]="todo.done"></mat-checkbox>
+                    <mat-checkbox (click)="updateSelected(todo)" class="example-margin" color="primary" [checked]="todo.done"></mat-checkbox>
                 </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
     </div>
 </div>

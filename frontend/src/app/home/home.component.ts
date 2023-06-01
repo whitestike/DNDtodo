@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { TodoService } from './todo.service';
 import { Todo } from 'src/types/todos';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../reducers';
+import { selectAllTodos } from './todo/todo.selector';
+import { TodoActions } from './todo/action-types';
+import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-home',
@@ -16,17 +20,15 @@ export class HomeComponent {
   displayedColumns = ['id', 'description', 'done'];
 
   constructor(
-    private todoService: TodoService
+    private store: Store<AppState>
   ){}
 
   ngOnInit(){
-    const todoObservable = this.todoService.GetAllTodos();
+    const todos$ = this.store.pipe(select(selectAllTodos));
 
-    todoObservable.subscribe(todos => {
+    todos$.subscribe(todos => {
       this.filterTodos(todos);
-    });
-
-    
+    });    
   }
 
   filterTodos(todos: Todo[]){
@@ -42,9 +44,18 @@ export class HomeComponent {
     this.filterTodos(this.todos);
   }
 
-  updateSelected(id: number){
-    this.todos[id - 1].done = !this.todos[id - 1].done
+  updateSelected(todo: Todo){
 
-    this.filterTodos(this.todos);
+    const newTodo: Todo = {
+      id: todo.id,
+      description: todo.description,
+      done: !todo.done
+    }
+    const update: Update<Todo> = {
+      id: todo.id,
+      changes: newTodo
+    }
+
+    this.store.dispatch(TodoActions.todoUpdated({update}));
   }
 }
