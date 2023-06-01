@@ -61,6 +61,18 @@ app.get("/todos", async (req, res) => {
   res.json(todos);
 })
 
+app.put("/todo", async (req, res) => {
+  const todo = req.body.todo;
+  const updatedTodo = await prisma.todo.update({
+    data: todo,
+    where: {
+      id: todo.id
+    }
+  });
+
+  res.status(201).end();
+})
+
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
