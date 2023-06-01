@@ -22,11 +22,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import { TodoEffects } from './home/todo/todo.effects';
 import { TodoReducer } from './home/todo/reducers/todo.reducers';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

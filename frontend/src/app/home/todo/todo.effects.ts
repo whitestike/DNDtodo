@@ -18,7 +18,7 @@ export class TodoEffects{
         ofType(TodoActions.todoUpdated),
         concatMap(action => this.service.SaveTodo(action.update.id ,action.update.changes)),
         
-    ),
+      ),
     {dispatch: false}
     );
 

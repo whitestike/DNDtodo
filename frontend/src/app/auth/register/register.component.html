@@ -1,0 +1,19 @@
+<div class="container--form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1>Register</h1>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input id="email" formControlName="email" type="email" matInput placeholder="name@email.com" value="">
+        </mat-form-field>  
+        <mat-form-field class="example-full-width"> 
+            <mat-label>name</mat-label>
+            <input id="name" formControlName="name" type="name" matInput value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width"> 
+            <mat-label>password</mat-label>
+            <input id="password" formControlName="password" type="password" matInput value="">
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary">Register</button>
+    </form>
+    <a class="link" routerLink="/login">login to an existing account</a>
+</div>

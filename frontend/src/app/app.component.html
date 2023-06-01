@@ -2,6 +2,7 @@
     <h1 style="margin: 0 10px 0 0;">DNDTodo</h1>
     <button *ngIf="isLoggedIn$ | async" mat-button routerLink="home">home</button>
     <button *ngIf="isLoggedOut$ | async" mat-button routerLink="login">login</button>
+    <button *ngIf="isLoggedOut$ | async" mat-button routerLink="register">register</button>
     <button *ngIf="isLoggedIn$ | async" mat-button (click)="logout()">logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

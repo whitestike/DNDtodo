@@ -17,6 +17,7 @@ import { authFeatureKey, authReducer } from './reducers';
 import { AuthGuard } from './auth.guard';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth.effects';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -36,7 +37,10 @@ import { AuthEffects } from './auth.effects';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    RouterModule.forChild([{path: 'login', component: LoginComponent}]),
+    RouterModule.forChild([
+      {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent}
+    ]),
     EffectsModule.forFeature([AuthEffects]),
     StoreModule.forFeature(
       authFeatureKey,
