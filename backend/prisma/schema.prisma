@@ -16,10 +16,14 @@ model User {
   email String   @unique
   name String
   password String
+  todos Todo[]
 }
 
 model Todo {
   id Int @id @default(autoincrement())
   description String
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int
+  room String
   done Boolean
 }
