@@ -76,6 +76,25 @@ app.get("/todos", async (req, res) => {
   }
 })
 
+app.post("/todo", async (req, res) => {
+  const todo = req.body.todo;
+
+  const createdUser = await prisma.todo.create({
+    data: {
+      description: todo.description,
+      user_id: todo.userId,
+      room: todo.room,
+      done: todo.done
+    },
+  });
+
+  if(createdUser != null){
+    res.send(todo);
+  }
+
+  res.status(401).end();
+})
+
 // Update a todo
 app.put("/todo", async (req, res) => {
   const todo = req.body.todo;
