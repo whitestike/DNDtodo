@@ -15,3 +15,7 @@ export const todoUpdated = createAction(
     "[Home Screen] updated a todo",
     props<{update: Update<Todo>}>()
 )
+
+export const clearTodos = createAction(
+    "[Header Logout Button] clear the todos",
+)

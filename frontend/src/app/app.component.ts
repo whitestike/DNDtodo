@@ -4,6 +4,7 @@ import { AppState } from './reducers';
 import { AuthActions } from './auth/action-types';
 import { Observable } from 'rxjs';
 import { isLoggedIn, isLoggedOut } from './auth/auth.selectors';
+import { TodoActions } from './home/todo/action-types';
  
 @Component({
   selector: 'app-root',
@@ -38,5 +39,6 @@ export class AppComponent implements OnInit{
 
   logout(){
     this.store.dispatch(AuthActions.logout());
+    this.store.dispatch(TodoActions.clearTodos());
   }
 }

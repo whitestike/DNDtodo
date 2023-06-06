@@ -49,6 +49,7 @@ export class HomeComponent {
     const newTodo: Todo = {
       id: todo.id,
       description: todo.description,
+      userId: todo.userId,
       done: !todo.done
     }
     const update: Update<Todo> = {

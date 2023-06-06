@@ -61,9 +61,19 @@ app.post("/user", async (req, res) => {
 });
 
 // Get all todos
-app.get("/todos", async (req, res) => {
-  const todos = await prisma.todo.findMany();
-  res.json(todos);
+app.get("/todos", async (req, res) => { 
+  if(req.query.id != undefined)
+  {
+    const userId: number = +req.query.id;
+    const todos = await prisma.todo.findMany({
+      where: {
+        user_id: userId
+      }
+    });
+    res.json(todos);
+  }else{
+    res.status(400).end();
+  }
 })
 
 // Update a todo
