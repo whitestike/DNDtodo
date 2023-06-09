@@ -3,4 +3,5 @@ export interface Todo {
     description: string
     userId: number
     done: boolean
+    room: string
 }

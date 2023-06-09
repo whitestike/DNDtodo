@@ -1,0 +1,21 @@
+<div *ngIf="open" class="modal">
+    <h1>Create a Todo</h1>
+    <form [formGroup]="form" class="container--form">
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description">
+        </mat-form-field>
+        <mat-form-field>
+        <mat-label>Room</mat-label>
+        <mat-select formControlName="room">
+            <mat-option value="living room">Living room</mat-option>
+            <mat-option value="bed room">Bed Room</mat-option>
+            <mat-option value="kitchen">Kitchen</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </form>
+    <div class="button--modal">
+        <button (click)="onCancel()" mat-raised-button color="warn">cancel</button>
+        <button (click)="handelSubmit()" mat-raised-button color="primary">submit</button>
+    </div>
+</div>

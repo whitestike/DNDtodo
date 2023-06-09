@@ -20,15 +20,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
-import { TodoEffects } from './home/todo/todo.effects';
 import { TodoReducer } from './home/todo/reducers/todo.reducers';
 import { RegisterComponent } from './auth/register/register.component';
+import { CreateTodoModalComponent } from './home/todo/create-todo-modal/create-todo-modal.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
+    CreateTodoModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { RegisterComponent } from './auth/register/register.component';
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature("todos", TodoReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

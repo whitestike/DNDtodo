@@ -28,6 +28,10 @@ export class TodoService{
             id: id,
             ...changes
         }
-        return this.http.put('http://localhost:8000/todo', {todo: todo})
+        return this.http.put('http://localhost:8000/todo', {todo})
+    }
+
+    CreateTodo(todo: Todo): Observable<any>{
+        return this.http.post('http://localhost:8000/todo', {todo})
     }
 }

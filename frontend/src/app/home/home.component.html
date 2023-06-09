@@ -4,6 +4,9 @@
         <div class="container--title">
             <h1>Your todo list</h1>
             <mat-checkbox [(ngModel)]="showDone" (ngModelChange)="updateAllComplete()" class="example-margin" color="primary">Hide done todo's</mat-checkbox>
+            <button (click)="openModal()" mat-mini-fab color="warn" aria-label="Example icon button with a home icon">
+                <p style="font-size: 40px; margin: 0;">+</p>
+            </button>
         </div>
         <table mat-table [dataSource]="displayTodos" class="table--todos mat-elevation-z8">
 
@@ -28,5 +31,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
+        <app-create-todo-modal [open]="createModalIsOpen" (handleCloseModal)="closeModal($event)"></app-create-todo-modal>
     </div>
 </div>

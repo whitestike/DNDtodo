@@ -17,6 +17,8 @@ export class HomeComponent {
   displayTodos: Todo[] = [];
   showDone: boolean = false;
 
+  createModalIsOpen: boolean = false;
+
   displayedColumns = ['id', 'description', 'done'];
 
   constructor(
@@ -50,6 +52,7 @@ export class HomeComponent {
       id: todo.id,
       description: todo.description,
       userId: todo.userId,
+      room: todo.room,
       done: !todo.done
     }
     const update: Update<Todo> = {
@@ -58,5 +61,13 @@ export class HomeComponent {
     }
 
     this.store.dispatch(TodoActions.todoUpdated({update}));
+  }
+
+  openModal(){
+    this.createModalIsOpen = true;
+  }
+
+  closeModal(event: boolean){
+    this.createModalIsOpen = event;
   }
 }
