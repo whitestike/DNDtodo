@@ -5,3 +5,10 @@ export interface Todo {
     done: boolean
     room: string
 }
+
+export interface TodoRequest {
+    description: string
+    userId: number
+    done: boolean
+    room: string
+}

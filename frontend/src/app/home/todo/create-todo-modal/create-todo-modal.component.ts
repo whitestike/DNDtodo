@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Todo } from 'src/types/todos';
+import { TodoRequest } from 'src/types/todos';
 import { User } from 'src/types/users';
+import { TodoService } from '../todo.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/reducers';
+import { TodoActions } from '../action-types';
 
 @Component({
   selector: 'app-create-todo-modal',
@@ -15,6 +19,10 @@ export class CreateTodoModalComponent {
     description: new FormControl<string>('', [Validators.required]),
     room: new FormControl<string>('', [Validators.required])
   })
+
+  constructor(
+    private store: Store<AppState>
+  ){}
 
   @Input()
   open: boolean = false;
@@ -33,12 +41,14 @@ export class CreateTodoModalComponent {
 
   handelSubmit(){
     const {description, room} = this.form.value;
-    const todo: Partial<Todo> = {
+    const create: TodoRequest = {
       description: description!,
-      userId: this.user.id,
+      userId: this.user.id!,
       done: false,
       room: room!
     }
+
+    this.store.dispatch(TodoActions.createTodos({create}));
 
     this.open = false;
     this.handleCloseModal.emit(false);

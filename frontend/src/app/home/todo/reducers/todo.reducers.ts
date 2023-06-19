@@ -17,11 +17,12 @@ export const TodoReducer = createReducer(
 
     on(TodoActions.allTodosLoaded,
         (state: any, action: any) => adapter.addMany(action.todos, state)),
-
     on(TodoActions.todoUpdated,
         (state: any, action: any) => adapter.updateOne(action.update, state)),
     on(TodoActions.clearTodos, 
-        (state: any, action: any) => adapter.removeAll(state))
+        (state: any, action: any) => adapter.removeAll(state)),
+    on(TodoActions.createTodos, 
+        (state: any, action: any) => adapter.addOne(action.create, state))
 );
 
 export const {selectAll} = adapter.getSelectors();

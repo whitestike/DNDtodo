@@ -79,6 +79,8 @@ app.get("/todos", async (req, res) => {
 app.post("/todo", async (req, res) => {
   const todo = req.body.todo;
 
+  console.log(todo);
+
   const createdUser = await prisma.todo.create({
     data: {
       description: todo.description,

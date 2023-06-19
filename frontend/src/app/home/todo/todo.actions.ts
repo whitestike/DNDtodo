@@ -1,6 +1,6 @@
 import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
-import { Todo } from "src/types/todos";
+import { Todo, TodoRequest } from "src/types/todos";
 
 export const loadAllTodos = createAction(
     "[Todos Resolver] Load All Todos"
@@ -18,4 +18,10 @@ export const todoUpdated = createAction(
 
 export const clearTodos = createAction(
     "[Header Logout Button] clear the todos",
+)
+
+export const createTodos = createAction(
+    "[Create Todo Modal] create a todo",
+    props<{create: TodoRequest}>()
+
 )

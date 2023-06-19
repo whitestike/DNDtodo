@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Todo } from "src/types/todos";
+import { Todo, TodoRequest } from "src/types/todos";
 import { User } from "src/types/users";
 
 @Injectable({
@@ -31,7 +31,12 @@ export class TodoService{
         return this.http.put('http://localhost:8000/todo', {todo})
     }
 
-    CreateTodo(todo: Todo): Observable<any>{
+    CreateTodo(todo: TodoRequest): Observable<any>{
+        console.log(todo);
         return this.http.post('http://localhost:8000/todo', {todo})
+    }
+
+    Test(todo: TodoRequest){
+        console.log(todo);
     }
 }
